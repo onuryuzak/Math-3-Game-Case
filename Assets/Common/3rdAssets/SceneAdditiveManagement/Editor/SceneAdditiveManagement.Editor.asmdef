@@ -1,0 +1,18 @@
+{
+    "name": "SceneAdditiveManagement.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:836b4abaa8247c34a86532491658488b"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
