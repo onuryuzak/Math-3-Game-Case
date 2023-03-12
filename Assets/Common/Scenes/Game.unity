@@ -123,6 +123,173 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &131995635
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 131995636}
+  - component: {fileID: 131995637}
+  m_Layer: 0
+  m_Name: RedMinion Pool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &131995636
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 131995635}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2865967007685105559}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &131995637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 131995635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bf32d33241037b47a4a12fd11d1af49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasScriptableDelegate: 1
+  scriptableDelegate: {fileID: 11400000, guid: 93000349a6135244ea4e3aa54942b307, type: 2}
+  poolItem:
+    prefab: {fileID: 0}
+    initialSize: 0
+    maxCapacity: 0
+    despawnOldest: 0
+  poolParent: {fileID: 131995636}
+  autoInitialize: 0
+  defaultAutoDespawnTime: 2
+  alwaysAutoDespawn: 0
+  initType: 0
+--- !u!1 &492173137
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 492173138}
+  - component: {fileID: 492173139}
+  m_Layer: 0
+  m_Name: Cell Pool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &492173138
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 492173137}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2865967007685105559}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &492173139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 492173137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bf32d33241037b47a4a12fd11d1af49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasScriptableDelegate: 1
+  scriptableDelegate: {fileID: 11400000, guid: 770332de27cfd6c42b34eff446b52bb7, type: 2}
+  poolItem:
+    prefab: {fileID: 0}
+    initialSize: 0
+    maxCapacity: 0
+    despawnOldest: 0
+  poolParent: {fileID: 492173138}
+  autoInitialize: 0
+  defaultAutoDespawnTime: 2
+  alwaysAutoDespawn: 0
+  initType: 0
+--- !u!1 &667489650
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 667489652}
+  - component: {fileID: 667489651}
+  m_Layer: 0
+  m_Name: Board
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &667489651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 667489650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c6abb9f0a6f04f40ae4d80453deadbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rows: 5
+  cols: 5
+  horizontalSpacing: 1.8
+  verticalSpacing: 2
+  cellFactory: {fileID: 11400000, guid: 116a217c8d2d3e049b79db62d48f7d62, type: 2}
+  minionsFactory: []
+  blueMinionFactory: {fileID: 11400000, guid: 0c7f7d7d4b0986d46802de675a20b266, type: 2}
+  redMinionFactory: {fileID: 11400000, guid: 784e4db853cb0014ca1ec86b90383b58, type: 2}
+  greenMinionFactory: {fileID: 11400000, guid: 57c6f888bcabd6545a5b644ae3d8f8c9, type: 2}
+  cellPositions: []
+  spawnedMinions: []
+--- !u!4 &667489652
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 667489650}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -269,8 +436,8 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
-  orthographic size: 5
+  orthographic: 1
+  orthographic size: 9.98
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -294,13 +461,69 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: 3.44, y: -1, z: -18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1162384126
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1162384127}
+  - component: {fileID: 1162384128}
+  m_Layer: 0
+  m_Name: GreenMinion Pool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1162384127
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1162384126}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2865967007685105559}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1162384128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1162384126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bf32d33241037b47a4a12fd11d1af49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasScriptableDelegate: 1
+  scriptableDelegate: {fileID: 11400000, guid: 74b9859bfe3d0bf43a9e00c689df54b6, type: 2}
+  poolItem:
+    prefab: {fileID: 0}
+    initialSize: 0
+    maxCapacity: 0
+    despawnOldest: 0
+  poolParent: {fileID: 1162384127}
+  autoInitialize: 0
+  defaultAutoDespawnTime: 2
+  alwaysAutoDespawn: 0
+  initType: 0
 --- !u!1001 &1472546727
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -356,25 +579,84 @@ PrefabInstance:
       propertyPath: m_Name
       value: GamePlay
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 774292416340215505, guid: 3cf28b730986d4741b7dad5fad1ebc46, type: 3}
+    - target: {fileID: 7416322441451434298, guid: 3cf28b730986d4741b7dad5fad1ebc46, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 199.84
+      objectReference: {fileID: 0}
+    - target: {fileID: 7416322441451434298, guid: 3cf28b730986d4741b7dad5fad1ebc46, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 99.91998
+      objectReference: {fileID: 0}
+    - target: {fileID: 8511770807123651470, guid: 3cf28b730986d4741b7dad5fad1ebc46, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 963194227}
+    - target: {fileID: 8511770807123651470, guid: 3cf28b730986d4741b7dad5fad1ebc46, type: 3}
+      propertyPath: m_RenderMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8511770807123651470, guid: 3cf28b730986d4741b7dad5fad1ebc46, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3cf28b730986d4741b7dad5fad1ebc46, type: 3}
---- !u!114 &2865967007567115360
+--- !u!1 &1538470687
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1538470688}
+  - component: {fileID: 1538470689}
+  m_Layer: 0
+  m_Name: BlueMinion Pool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1538470688
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1538470687}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2865967007685105559}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1538470689
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2865967007567115366}
+  m_GameObject: {fileID: 1538470687}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96afb707145b68544a3075f8160a721a, type: 3}
+  m_Script: {fileID: 11500000, guid: 0bf32d33241037b47a4a12fd11d1af49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsInitialized: 0
-  InitManagerList:
-  - {fileID: 2865967007685105557}
-  - {fileID: 2865967007567115360}
+  hasScriptableDelegate: 1
+  scriptableDelegate: {fileID: 11400000, guid: 4e775270ff8992d45834321efd3dbede, type: 2}
+  poolItem:
+    prefab: {fileID: 0}
+    initialSize: 0
+    maxCapacity: 0
+    despawnOldest: 0
+  poolParent: {fileID: 1538470688}
+  autoInitialize: 0
+  defaultAutoDespawnTime: 2
+  alwaysAutoDespawn: 0
+  initType: 0
 --- !u!1 &2865967007567115366
 GameObject:
   m_ObjectHideFlags: 0
@@ -384,7 +666,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2865967007567115367}
-  - component: {fileID: 2865967007567115360}
   m_Layer: 0
   m_Name: GameCore
   m_TagString: Untagged
@@ -417,43 +698,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2865967007685105559}
-  - component: {fileID: 2865967007685105557}
-  - component: {fileID: 2865967007685105558}
+  - component: {fileID: 2865967007685105561}
+  - component: {fileID: 2865967007685105560}
   m_Layer: 0
-  m_Name: ObjectCamp
+  m_Name: GamePools
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2865967007685105557
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2865967007685105556}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d75bc3a3b34e4dc08b4e6bc89fbacd7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IsInitialized: 0
-  PrefabContaierSOList: []
-  RegisterSOList: []
-  RegisterManagerList: []
---- !u!114 &2865967007685105558
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2865967007685105556}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09bfbd8181ec044fc8508678cc8179fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &2865967007685105559
 Transform:
   m_ObjectHideFlags: 0
@@ -465,7 +718,67 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 492173138}
+  - {fileID: 1538470688}
+  - {fileID: 131995636}
+  - {fileID: 1162384127}
   m_Father: {fileID: 2865967007567115367}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2865967007685105560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2865967007685105556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80a8308f246eaf34da8ae4333c70de3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelSystem: {fileID: 11400000, guid: 8eb289133f217944c88b921f4269f294, type: 2}
+  OnLevelLoadingStarted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2865967007685105561}
+        m_TargetAssemblyTypeName: PoolerSingleton, Assembly-CSharp
+        m_MethodName: DespawnAll
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnLevelLoadingEnded:
+    m_PersistentCalls:
+      m_Calls: []
+  OnLevelLoaded:
+    m_PersistentCalls:
+      m_Calls: []
+  OnLevelUnloaded:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &2865967007685105561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2865967007685105556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0348c7945158b3459466fbb186d5863, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dontDestroyOnLoad: 1
+  useDestroyImmediate: 1
+  poolers:
+  - {fileID: 492173139}
+  - {fileID: 1538470689}
+  - {fileID: 1162384128}
+  - {fileID: 131995637}

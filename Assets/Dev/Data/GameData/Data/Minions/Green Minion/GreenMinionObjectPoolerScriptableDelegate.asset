@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 302683e63b0eba14e9cc30a5686d6e87, type: 3}
+  m_Name: GreenMinionObjectPoolerScriptableDelegate
+  m_EditorClassIdentifier: 
+  poolItem:
+    prefab: {fileID: 1145601489396174585, guid: d231ceefe1bc24f49bbdb1001aabbb43, type: 3}
+    initialSize: 25
+    maxCapacity: 100
+    despawnOldest: 1
