@@ -8,7 +8,6 @@ public class GameBoardSetupState : GameBoardState
 
     public override void EnterState()
     {
-        board.InitializeBaseMinion();
         board.InitializeCell();
         board.InitializeGridMinions();
         SetState(new GameBoardIdleState(board));

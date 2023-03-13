@@ -268,13 +268,12 @@ MonoBehaviour:
   cols: 5
   horizontalSpacing: 1.8
   verticalSpacing: 2
+  spawnCount: 7
   cellFactory: {fileID: 11400000, guid: 116a217c8d2d3e049b79db62d48f7d62, type: 2}
-  minionsFactory: []
-  blueMinionFactory: {fileID: 11400000, guid: 0c7f7d7d4b0986d46802de675a20b266, type: 2}
-  redMinionFactory: {fileID: 11400000, guid: 784e4db853cb0014ca1ec86b90383b58, type: 2}
-  greenMinionFactory: {fileID: 11400000, guid: 57c6f888bcabd6545a5b644ae3d8f8c9, type: 2}
-  cellPositions: []
-  spawnedMinions: []
+  minionsFactory:
+  - {fileID: 11400000, guid: 0c7f7d7d4b0986d46802de675a20b266, type: 2}
+  - {fileID: 11400000, guid: 57c6f888bcabd6545a5b644ae3d8f8c9, type: 2}
+  - {fileID: 11400000, guid: 784e4db853cb0014ca1ec86b90383b58, type: 2}
 --- !u!4 &667489652
 Transform:
   m_ObjectHideFlags: 0

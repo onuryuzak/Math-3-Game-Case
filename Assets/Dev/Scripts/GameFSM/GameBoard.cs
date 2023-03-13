@@ -15,22 +15,17 @@ public class GameBoard : MonoBehaviour
     [SerializeField] private int cols = 5;
     [SerializeField] private float horizontalSpacing = 1;
     [SerializeField] private float verticalSpacing = 1;
+    [SerializeField] private int spawnCount = 7;
     [SerializeField] private GameObjectFactory cellFactory;
     [SerializeField] private List<GameObjectFactory> minionsFactory = new List<GameObjectFactory>();
-    [SerializeField] private GameObjectFactory blueMinionFactory;
-    [SerializeField] private GameObjectFactory redMinionFactory;
-    [SerializeField] private GameObjectFactory greenMinionFactory;
-    private List<Cell> cells = new List<Cell>();
-    public List<MinionBase> spawnedMinions = new List<MinionBase>();
-    private const int spawnCount = 7;
 
     #endregion
 
     #region PRIVATE FIELDS
 
     private readonly GameStateMachine stateMachine = new GameStateMachine();
-    private float blockWidth;
-    private float blockHeight;
+    private List<MinionBase> spawnedMinions = new List<MinionBase>();
+    private List<Cell> cells = new List<Cell>();
 
     #endregion
 
@@ -49,33 +44,17 @@ public class GameBoard : MonoBehaviour
 
     public void InitializeCell()
     {
-        // Loop through each row and column to create a cell
-        for (int row = 0; row < rows; row++)
+        var cellPositions = CalculateCellPositions();
+        foreach (var cell in cellPositions.Select(CreateCell))
         {
-            for (int col = 0; col < cols; col++)
-            {
-                // Calculate the position of the cell based on its row and column
-                var x = col * horizontalSpacing;
-                var y = row * -verticalSpacing;
-
-                // Create a new cell at the calculated position and add it to the list of cells
-                var cell = cellFactory.Create(new Vector3(x, y, 0));
-                cells.Add(cell.GetComponent<Cell>());
-            }
+            cells.Add(cell);
         }
-    }
-
-    public void InitializeBaseMinion()
-    {
-        minionsFactory.Add(blueMinionFactory);
-        minionsFactory.Add(redMinionFactory);
-        minionsFactory.Add(greenMinionFactory);
     }
 
     public void InitializeGridMinions()
     {
         // Check if there are mergeable minions
-        bool hasMergeable = HasMergeableMinion();
+        var hasMergeable = HasMergeableMinion();
 
         // Determine how many minions to spawn
         var count = spawnCount - spawnedMinions.Count;
@@ -86,8 +65,7 @@ public class GameBoard : MonoBehaviour
             for (int i = 0; i < count; i++)
             {
                 // Choose a random minion from the factory and create it at a random position
-                int randomIndex = Random.Range(0, minionsFactory.Count);
-                var minion = minionsFactory[randomIndex].Create(GetRandomPosition()).GetComponent<MinionBase>();
+                var minion = RandomSpawnMinion();
 
                 // Add the spawned minion to the list of spawned minions
                 spawnedMinions.Add(minion);
@@ -102,26 +80,21 @@ public class GameBoard : MonoBehaviour
                 if (!hasMergeable && spawnedMinions.Count >= 3)
                 {
                     // Find the most frequent type of minion among the spawned minions
-                    var mostFrequent = spawnedMinions
-                        .GroupBy(obj => obj)
-                        .OrderByDescending(group => group.Count())
-                        .Select(group => group.Key)
-                        .FirstOrDefault();
+                    var mostFrequent = MostFrequentMinion();
 
                     // Find a minion from the factory that matches the most frequent type of minion
-                    var go = minionsFactory.Find(x =>
+                    var matchedMostFrequentMinion = minionsFactory.Find(x =>
                         mostFrequent != null &&
                         x.Prefab.GetComponent<MinionBase>().MinionType == mostFrequent.MinionType);
 
                     // Create the minion at a random position and add it to the list of spawned minions
-                    var go1 = go.Create(GetRandomPosition());
-                    spawnedMinions.Add(go1.GetComponent<MinionBase>());
+                    var minion = matchedMostFrequentMinion.Create<MinionBase>(GetRandomPosition());
+                    spawnedMinions.Add(minion);
                 }
                 else
                 {
                     // If there are not enough spawned minions to merge, spawn a random minion from the factory
-                    int randomIndex = Random.Range(0, minionsFactory.Count);
-                    var minion = minionsFactory[randomIndex].Create(GetRandomPosition()).GetComponent<MinionBase>();
+                    var minion = RandomSpawnMinion();
 
                     // Add the spawned minion to the list of spawned minions
                     spawnedMinions.Add(minion);
@@ -133,27 +106,72 @@ public class GameBoard : MonoBehaviour
         }
     }
 
+    public void SetState(GameBoardState state)
+    {
+        stateMachine.SetState(state);
+    }
+
+    #endregion
+
+    #region PRIVATE METHODS
+
+    private List<Vector3> CalculateCellPositions()
+    {
+        var cellPositions = new List<Vector3>();
+        for (int row = 0; row < rows; row++)
+        {
+            for (int col = 0; col < cols; col++)
+            {
+                // Calculate the position of the cell based on its row and column
+                var x = col * horizontalSpacing;
+                var y = row * -verticalSpacing;
+                cellPositions.Add(new Vector3(x, y, 0));
+            }
+        }
+
+        return cellPositions;
+    }
+
+    private Cell CreateCell(Vector3 position)
+    {
+        return cellFactory.Create<Cell>(position);
+    }
+
+    private MinionBase RandomSpawnMinion()
+    {
+        int randomIndex = Random.Range(0, minionsFactory.Count);
+        return minionsFactory[randomIndex].Create<MinionBase>(GetRandomPosition());
+    }
+
+    private MinionBase MostFrequentMinion()
+    {
+        return spawnedMinions
+            .GroupBy(obj => obj)
+            .OrderByDescending(group => group.Count())
+            .Select(group => group.Key)
+            .FirstOrDefault();
+    }
+
     private bool HasMergeableMinion()
     {
         // Loop over each minion type in the factory
         for (int i = 0; i < minionsFactory.Count; i++)
         {
             var mergeCount = 0;
-
+            var baseMinion = minionsFactory[i].Prefab.GetComponent<MinionBase>();
             // Loop over each spawned minion
             for (int j = 0; j < spawnedMinions.Count; j++)
             {
                 // Check if the spawned minion has the same type as the current minion type in the factory
-                if (minionsFactory[i].Prefab.GetComponent<MinionBase>().MinionType == spawnedMinions[j].MinionType)
-                {
-                    mergeCount += 1;
+                if (baseMinion.MinionType !=
+                    spawnedMinions[j].MinionType) continue;
+                mergeCount += 1;
 
-                    // If we've found at least three minions of the same type, we can merge them
-                    if (mergeCount >= 3)
-                    {
-                        // Return true if we can merge the minions
-                        return true;
-                    }
+                // If we've found at least three minions of the same type, we can merge them
+                if (mergeCount >= 3)
+                {
+                    // Return true if we can merge the minions
+                    return true;
                 }
             }
         }
@@ -178,11 +196,6 @@ public class GameBoard : MonoBehaviour
         cellsByPosition[randomPosition].isFull = true;
 
         return randomPosition;
-    }
-
-    public void SetState(GameBoardState state)
-    {
-        stateMachine.SetState(state);
     }
 
     #endregion
