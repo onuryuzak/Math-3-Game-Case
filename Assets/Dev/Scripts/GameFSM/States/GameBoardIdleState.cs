@@ -1,39 +1,40 @@
-
 using UnityEngine;
 
-public class GameBoardIdleState : GameBoardState 
+public class GameBoardIdleState : GameBoardState
 {
-    // private GameItem draggedItem;
+    private MinionBase draggedItem;
+    private RaycastHit2D hit;
 
 
     public GameBoardIdleState(GameBoard board) : base(board)
     {
     }
 
-    public override void EnterState() {
-        // foreach (var item in board.Items) {
-        //     item.enabled = true;
-        // }
+    public override void EnterState()
+    {
     }
 
-    public override void ExitState() {
-        // foreach (var item in board.Items) {
-        //     item.enabled = false;
-        // }
+    public override void ExitState()
+    {
     }
 
-    public override void Update() {
-        // if (Input.GetMouseButtonDown(0)) {
-        //     var item = FindItemAtMousePosition();
-        //     if (item != null) {
-        //         draggedItem = item;
-        //         SetState(new GameBoardDragItemState(board, draggedItem));
-        //     }
-        // }
+    public override void Update()
+    {
+        if (!Input.GetMouseButtonDown(0)) return;
+        var item = FindItemAtMousePosition();
+        if (item == null) return;
+        draggedItem = item;
+        draggedItem.minionSprite.sortingOrder = 3;
+        draggedItem.currentCell.isFull = false;
+        draggedItem.currentCell = null;
+        
+        SetState(new GameBoardDragItemState(board, draggedItem));
     }
 
-    // private GameItem FindItemAtMousePosition() {
-    //     var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-    //     return Physics.Raycast(ray, out var hit) ? hit.collider.gameObject.GetComponent<GameItem>() : null;
-    // }
+    private MinionBase FindItemAtMousePosition()
+    {
+        var ray = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        hit = Physics2D.Raycast(ray, Vector2.zero);
+        return hit ? hit.collider.gameObject.GetComponent<MinionBase>() : null;
+    }
 }

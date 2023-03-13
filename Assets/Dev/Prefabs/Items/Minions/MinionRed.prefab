@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1983032031053892943}
   m_Layer: 7
   m_Name: MinionRed
-  m_TagString: Minion
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -125,3 +125,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MinionType: 0
+  currentCell: {fileID: 0}
+  minionSprite: {fileID: 1185463321920250285}

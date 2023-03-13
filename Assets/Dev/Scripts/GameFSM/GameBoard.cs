@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using MyBox;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -13,8 +14,8 @@ public class GameBoard : MonoBehaviour
 
     [SerializeField] private int rows = 5;
     [SerializeField] private int cols = 5;
-    [SerializeField] private float horizontalSpacing = 1;
-    [SerializeField] private float verticalSpacing = 1;
+    [SerializeField] private float horizontalSpacing = 1.8f;
+    [SerializeField] private float verticalSpacing = 2f;
     [SerializeField] private int spawnCount = 7;
     [SerializeField] private GameObjectFactory cellFactory;
     [SerializeField] private List<GameObjectFactory> minionsFactory = new List<GameObjectFactory>();
@@ -24,7 +25,7 @@ public class GameBoard : MonoBehaviour
     #region PRIVATE FIELDS
 
     private readonly GameStateMachine stateMachine = new GameStateMachine();
-    private List<MinionBase> spawnedMinions = new List<MinionBase>();
+    private List<Minion> spawnedMinions = new List<Minion>();
     private List<Cell> cells = new List<Cell>();
 
     #endregion
@@ -35,6 +36,11 @@ public class GameBoard : MonoBehaviour
     private void Start()
     {
         SetState(new GameBoardSetupState(this));
+    }
+
+    private void Update()
+    {
+        stateMachine.Update();
     }
 
     #endregion
@@ -51,6 +57,7 @@ public class GameBoard : MonoBehaviour
         }
     }
 
+
     public void InitializeGridMinions()
     {
         // Check if there are mergeable minions
@@ -65,7 +72,7 @@ public class GameBoard : MonoBehaviour
             for (int i = 0; i < count; i++)
             {
                 // Choose a random minion from the factory and create it at a random position
-                var minion = RandomSpawnMinion();
+                var minion = RandomSpawnMinion(i);
 
                 // Add the spawned minion to the list of spawned minions
                 spawnedMinions.Add(minion);
@@ -85,16 +92,21 @@ public class GameBoard : MonoBehaviour
                     // Find a minion from the factory that matches the most frequent type of minion
                     var matchedMostFrequentMinion = minionsFactory.Find(x =>
                         mostFrequent != null &&
-                        x.Prefab.GetComponent<MinionBase>().MinionType == mostFrequent.MinionType);
+                        x.Prefab.GetComponent<Minion>().MinionType == mostFrequent.MinionType);
 
                     // Create the minion at a random position and add it to the list of spawned minions
-                    var minion = matchedMostFrequentMinion.Create<MinionBase>(GetRandomPosition());
+                    var (randomPos, chosenCell) = GetRandomAvailableCell();
+                    var initPosition = new Vector2(0.5f + i, 2);
+                    var minion = matchedMostFrequentMinion.Create<Minion>(initPosition);
+                    minion.transform.DOMove(randomPos, 0.5f).SetDelay(1f);
+
+                    minion.currentCell = chosenCell;
                     spawnedMinions.Add(minion);
                 }
                 else
                 {
                     // If there are not enough spawned minions to merge, spawn a random minion from the factory
-                    var minion = RandomSpawnMinion();
+                    var minion = RandomSpawnMinion(i);
 
                     // Add the spawned minion to the list of spawned minions
                     spawnedMinions.Add(minion);
@@ -105,6 +117,17 @@ public class GameBoard : MonoBehaviour
             }
         }
     }
+
+    public Cell GetDropPosition(Transform draggedItem)
+    {
+        var availableCells = cells.Where(c => !c.isFull);
+
+        // Sort by distance and return the nearest available cell
+        return availableCells.OrderBy(c => Vector3.Distance(draggedItem.transform.position, c.transform.position))
+            .FirstOrDefault();
+        // return cells.OrderBy(c => Vector3.Distance(draggedItem.position, c.transform.position)).FirstOrDefault();
+    }
+
 
     public void SetState(GameBoardState state)
     {
@@ -137,10 +160,15 @@ public class GameBoard : MonoBehaviour
         return cellFactory.Create<Cell>(position);
     }
 
-    private MinionBase RandomSpawnMinion()
+    private Minion RandomSpawnMinion(int index)
     {
         int randomIndex = Random.Range(0, minionsFactory.Count);
-        return minionsFactory[randomIndex].Create<MinionBase>(GetRandomPosition());
+        var (randomPos, chosenCell) = GetRandomAvailableCell();
+        var initPosition = new Vector2(0.5f + index, 2);
+        var minion = minionsFactory[randomIndex].Create<Minion>(initPosition);
+        minion.transform.DOMove(randomPos, 0.5f).SetDelay(1f);
+        minion.currentCell = chosenCell;
+        return minion;
     }
 
     private MinionBase MostFrequentMinion()
@@ -158,7 +186,7 @@ public class GameBoard : MonoBehaviour
         for (int i = 0; i < minionsFactory.Count; i++)
         {
             var mergeCount = 0;
-            var baseMinion = minionsFactory[i].Prefab.GetComponent<MinionBase>();
+            var baseMinion = minionsFactory[i].Prefab.GetComponent<Minion>();
             // Loop over each spawned minion
             for (int j = 0; j < spawnedMinions.Count; j++)
             {
@@ -180,7 +208,7 @@ public class GameBoard : MonoBehaviour
         return false;
     }
 
-    private Vector2 GetRandomPosition()
+    private (Vector2, Cell) GetRandomAvailableCell()
     {
         // Create a dictionary to hold the cells by position
         var cellsByPosition = cells.ToDictionary(c => c.transform.position, c => c);
@@ -195,7 +223,7 @@ public class GameBoard : MonoBehaviour
         // Set the cell at the chosen position to be full
         cellsByPosition[randomPosition].isFull = true;
 
-        return randomPosition;
+        return (randomPosition, cellsByPosition[randomPosition]);
     }
 
     #endregion
