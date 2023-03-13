@@ -98,9 +98,8 @@ public class GameBoard : MonoBehaviour
                     var (randomPos, chosenCell) = GetRandomAvailableCell();
                     var initPosition = new Vector2(0.5f + i, 2);
                     var minion = matchedMostFrequentMinion.Create<Minion>(initPosition);
-                    minion.transform.DOMove(randomPos, 0.5f).SetDelay(1f);
-
-                    minion.currentCell = chosenCell;
+                    minion.MoveToCell(randomPos);
+                    minion.SetCurrentCell(chosenCell);
                     spawnedMinions.Add(minion);
                 }
                 else
@@ -125,7 +124,6 @@ public class GameBoard : MonoBehaviour
         // Sort by distance and return the nearest available cell
         return availableCells.OrderBy(c => Vector3.Distance(draggedItem.transform.position, c.transform.position))
             .FirstOrDefault();
-        // return cells.OrderBy(c => Vector3.Distance(draggedItem.position, c.transform.position)).FirstOrDefault();
     }
 
 
@@ -166,8 +164,8 @@ public class GameBoard : MonoBehaviour
         var (randomPos, chosenCell) = GetRandomAvailableCell();
         var initPosition = new Vector2(0.5f + index, 2);
         var minion = minionsFactory[randomIndex].Create<Minion>(initPosition);
-        minion.transform.DOMove(randomPos, 0.5f).SetDelay(1f);
-        minion.currentCell = chosenCell;
+        minion.MoveToCell(randomPos);
+        minion.SetCurrentCell(chosenCell);
         return minion;
     }
 

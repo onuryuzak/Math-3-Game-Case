@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class GameBoardDragItemState : GameBoardState
 {
-    private readonly MinionBase draggedItem;
+    private readonly Minion draggedItem;
 
-    public GameBoardDragItemState(GameBoard board, MinionBase draggedItem) : base(board)
+    public GameBoardDragItemState(GameBoard board, Minion draggedItem) : base(board)
     {
         this.draggedItem = draggedItem;
     }
@@ -26,9 +26,9 @@ public class GameBoardDragItemState : GameBoardState
         var dropCell = board.GetDropPosition(draggedItem.transform);
         if (dropCell != null && !dropCell.isFull)
         {
-            draggedItem.MoveToCell(dropCell.transform.position);
+            draggedItem.SnapToCell(dropCell.transform.position);
             draggedItem.minionSprite.sortingOrder = 2;
-            draggedItem.currentCell = dropCell;
+            draggedItem.SetCurrentCell(dropCell);
             draggedItem.currentCell.isFull = true;
             // var mergeItems = board.FindMergeItems(dropPosition);
             // if (mergeItems.Count >= 2)

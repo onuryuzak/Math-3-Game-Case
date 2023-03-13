@@ -578,26 +578,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GamePlay
       objectReference: {fileID: 0}
-    - target: {fileID: 7416322441451434298, guid: 3cf28b730986d4741b7dad5fad1ebc46, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 199.84
-      objectReference: {fileID: 0}
-    - target: {fileID: 7416322441451434298, guid: 3cf28b730986d4741b7dad5fad1ebc46, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 99.91998
-      objectReference: {fileID: 0}
     - target: {fileID: 8511770807123651470, guid: 3cf28b730986d4741b7dad5fad1ebc46, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 963194227}
-    - target: {fileID: 8511770807123651470, guid: 3cf28b730986d4741b7dad5fad1ebc46, type: 3}
-      propertyPath: m_RenderMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8511770807123651470, guid: 3cf28b730986d4741b7dad5fad1ebc46, type: 3}
-      propertyPath: m_AdditionalShaderChannelsFlag
-      value: 25
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3cf28b730986d4741b7dad5fad1ebc46, type: 3}
 --- !u!1 &1538470687

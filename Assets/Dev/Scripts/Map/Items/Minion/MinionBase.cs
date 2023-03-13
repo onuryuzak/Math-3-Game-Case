@@ -8,7 +8,7 @@ public class MinionBase : MonoBehaviour
     [HideInInspector] public Cell currentCell;
     public SpriteRenderer minionSprite;
 
-    public virtual void MoveToCell(Vector3 pos)
+    public virtual void SnapToCell(Vector3 pos)
     {
     }
 }
