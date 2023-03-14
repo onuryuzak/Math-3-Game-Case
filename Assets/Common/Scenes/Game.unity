@@ -281,7 +281,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rows: 5
   cols: 5
-  horizontalSpacing: 1.8
+  horizontalSpacing: 2
   verticalSpacing: 2
   spawnCount: 7
   cellFactory: {fileID: 11400000, guid: 116a217c8d2d3e049b79db62d48f7d62, type: 2}
@@ -289,6 +289,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0c7f7d7d4b0986d46802de675a20b266, type: 2}
   - {fileID: 11400000, guid: 57c6f888bcabd6545a5b644ae3d8f8c9, type: 2}
   - {fileID: 11400000, guid: 784e4db853cb0014ca1ec86b90383b58, type: 2}
+  cellIndex: []
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -460,7 +461,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.44, y: -1, z: -18}
+  m_LocalPosition: {x: 4, y: 8, z: -18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

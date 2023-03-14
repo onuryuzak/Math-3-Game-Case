@@ -27,6 +27,7 @@ public class GameBoardIdleState : GameBoardState
         draggedItem.minionSprite.sortingOrder = 3;
         draggedItem.currentCell.isFull = false;
         draggedItem.SetCurrentCell(null);
+        draggedItem.SetCurrentIndex(Vector2.zero);
 
         SetState(new GameBoardDragItemState(board, draggedItem));
     }

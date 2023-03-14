@@ -5,5 +5,5 @@ using UnityEngine.Serialization;
 
 public class Cell : MonoBehaviour
 {
-public bool isFull ;
+    public bool isFull;
 }

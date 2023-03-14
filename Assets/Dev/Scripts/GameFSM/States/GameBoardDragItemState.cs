@@ -30,11 +30,10 @@ public class GameBoardDragItemState : GameBoardState
             draggedItem.minionSprite.sortingOrder = 2;
             draggedItem.SetCurrentCell(dropCell);
             draggedItem.currentCell.isFull = true;
-            // var mergeItems = board.FindMergeItems(dropPosition);
-            // if (mergeItems.Count >= 2)
-            // {
-            //     board.MergeItems(mergeItems);
-            // }
+            draggedItem.SetCurrentIndex(dropCell.transform.position);
+            board.mergeCount = 0;
+            board.matchedMinion.Clear();
+            board.DetectAndMergeMinions(draggedItem);
         }
 
         SetState(new GameBoardIdleState(board));

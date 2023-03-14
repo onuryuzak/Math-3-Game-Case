@@ -1,10 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using DG.Tweening;
-using MyBox;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 
@@ -19,6 +16,7 @@ public class GameBoard : MonoBehaviour
     [SerializeField] private int spawnCount = 7;
     [SerializeField] private GameObjectFactory cellFactory;
     [SerializeField] private List<GameObjectFactory> minionsFactory = new List<GameObjectFactory>();
+    [SerializeField] private List<Vector2> cellIndex;
 
     #endregion
 
@@ -30,6 +28,12 @@ public class GameBoard : MonoBehaviour
 
     #endregion
 
+    #region PUBLIC FIELDS
+
+    public int mergeCount = 0;
+    public List<Minion> matchedMinion = new List<Minion>();
+
+    #endregion
 
     #region UNITY METHODS
 
@@ -99,6 +103,7 @@ public class GameBoard : MonoBehaviour
                     var initPosition = new Vector2(0.5f + i, 2);
                     var minion = matchedMostFrequentMinion.Create<Minion>(initPosition);
                     minion.MoveToCell(randomPos);
+                    minion.SetCurrentIndex(randomPos);
                     minion.SetCurrentCell(chosenCell);
                     spawnedMinions.Add(minion);
                 }
@@ -132,9 +137,69 @@ public class GameBoard : MonoBehaviour
         stateMachine.SetState(state);
     }
 
+    public void DetectAndMergeMinions(Minion currentMinion, Minion prevMinion = null)
+    {
+        var neighbors = GetNeighborMinions(currentMinion, prevMinion, spawnedMinions);
+
+        if (!matchedMinion.Contains(currentMinion))
+            matchedMinion.Add(currentMinion);
+        foreach (var neighbor in neighbors)
+        {
+            if (neighbor.MinionType == currentMinion.MinionType)
+            {
+                Debug.Log(neighbor.name + " = minion name");
+                if (!matchedMinion.Contains(neighbor))
+                    matchedMinion.Add(neighbor);
+                mergeCount++;
+                DetectAndMergeMinions(neighbor, currentMinion);
+                Debug.Log(mergeCount);
+            }
+        }
+
+
+        if (mergeCount >= 2)
+        {
+            MergeMatchedMinion();
+            InitializeGridMinions();
+            neighbors.Clear();
+        }
+    }
+
     #endregion
 
     #region PRIVATE METHODS
+
+    private void MergeMatchedMinion()
+    {
+        foreach (var cc in matchedMinion)
+        {
+            cc.DestroySelf();
+            spawnedMinions.Remove(cc);
+        }
+    }
+
+    private List<Minion> GetNeighborMinions(Minion currentMinion, Minion prevMinion, List<Minion> spawnedMinions)
+    {
+        var neighbors = new List<Vector2>
+        {
+            new(currentMinion.index.x + 2, currentMinion.index.y),
+            new(currentMinion.index.x - 2, currentMinion.index.y),
+            new(currentMinion.index.x, currentMinion.index.y + 2),
+            new(currentMinion.index.x, currentMinion.index.y - 2)
+        };
+
+        var neighborMinions = new List<Minion>();
+        foreach (var neighbor in neighbors)
+        {
+            var foundMinion = spawnedMinions.FirstOrDefault(m => m.index == neighbor);
+            if (foundMinion != null && foundMinion != prevMinion)
+            {
+                neighborMinions.Add(foundMinion);
+            }
+        }
+
+        return neighborMinions;
+    }
 
     private List<Vector3> CalculateCellPositions()
     {
@@ -145,8 +210,10 @@ public class GameBoard : MonoBehaviour
             {
                 // Calculate the position of the cell based on its row and column
                 var x = col * horizontalSpacing;
-                var y = row * -verticalSpacing;
-                cellPositions.Add(new Vector3(x, y, 0));
+                var y = row * verticalSpacing;
+                int xIndex = Mathf.RoundToInt(x);
+                int yIndex = Mathf.RoundToInt(y);
+                cellPositions.Add(new Vector3(xIndex, yIndex, 0));
             }
         }
 
@@ -165,6 +232,7 @@ public class GameBoard : MonoBehaviour
         var initPosition = new Vector2(0.5f + index, 2);
         var minion = minionsFactory[randomIndex].Create<Minion>(initPosition);
         minion.MoveToCell(randomPos);
+        minion.SetCurrentIndex(randomPos);
         minion.SetCurrentCell(chosenCell);
         return minion;
     }
