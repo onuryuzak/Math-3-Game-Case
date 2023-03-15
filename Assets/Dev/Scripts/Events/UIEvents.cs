@@ -6,6 +6,7 @@ namespace Base.Events
     {
         public static class UIEvents
         {
+            public static Action<MinionType> OnMinionMerge;
         }
     }
 }

@@ -52,6 +52,11 @@ public class GameBoard : MonoBehaviour
 
     #region PUBLIC METHODS
 
+    public void SetState(GameBoardState state)
+    {
+        stateMachine.SetState(state);
+    }
+
     public void InitializeCell()
     {
         var cellPositions = CalculateCellPositions();
@@ -100,7 +105,7 @@ public class GameBoard : MonoBehaviour
 
                     // Create the minion at a random position and add it to the list of spawned minions
                     var (randomPos, chosenCell) = GetRandomAvailableCell();
-                    var initPosition = new Vector2(0.5f + i, 2);
+                    var initPosition = new Vector2(1f + i, 10);
                     var minion = matchedMostFrequentMinion.Create<Minion>(initPosition);
                     minion.MoveToCell(randomPos);
                     minion.SetCurrentIndex(randomPos);
@@ -132,12 +137,7 @@ public class GameBoard : MonoBehaviour
     }
 
 
-    public void SetState(GameBoardState state)
-    {
-        stateMachine.SetState(state);
-    }
-
-    public void DetectAndMergeMinions(Minion currentMinion, Minion prevMinion = null)
+    public (bool, MinionType) DetectAndMergeMinions(Minion currentMinion, Minion prevMinion = null)
     {
         var neighbors = GetNeighborMinions(currentMinion, prevMinion, spawnedMinions);
 
@@ -160,14 +160,23 @@ public class GameBoard : MonoBehaviour
         if (mergeCount >= 2)
         {
             MergeMatchedMinion();
+
             InitializeGridMinions();
             neighbors.Clear();
+            return (true, GetMatchedMinionType());
         }
+
+        return (false, GetMatchedMinionType());
     }
 
     #endregion
 
     #region PRIVATE METHODS
+
+    private MinionType GetMatchedMinionType()
+    {
+        return matchedMinion[0].MinionType;
+    }
 
     private void MergeMatchedMinion()
     {
@@ -229,7 +238,7 @@ public class GameBoard : MonoBehaviour
     {
         int randomIndex = Random.Range(0, minionsFactory.Count);
         var (randomPos, chosenCell) = GetRandomAvailableCell();
-        var initPosition = new Vector2(0.5f + index, 2);
+        var initPosition = new Vector2(1f + index, 10);
         var minion = minionsFactory[randomIndex].Create<Minion>(initPosition);
         minion.MoveToCell(randomPos);
         minion.SetCurrentIndex(randomPos);

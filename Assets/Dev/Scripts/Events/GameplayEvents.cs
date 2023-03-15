@@ -7,6 +7,7 @@ namespace Base.Events
     {
         public static class GameplayEvents
         {
+            public static Action OnGameEnd;
         }
     }
 }

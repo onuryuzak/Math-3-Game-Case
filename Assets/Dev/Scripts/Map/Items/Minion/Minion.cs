@@ -29,7 +29,8 @@ public class Minion : MinionBase, IPooledObject
 
     public override void DestroySelf()
     {
-        currentCell.isFull = false;
+        //go to correct UI pos. eğer mavi minionsa mavi UI gidecek. Ama ilk önce hoplayıp animasyon yapacak.
+        // currentCell.isFull = false;
         currentCell = null;
         index = Vector2.zero;
         Pooler.Despawn(gameObject);
