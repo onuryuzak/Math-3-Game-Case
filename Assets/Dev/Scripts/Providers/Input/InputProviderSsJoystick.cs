@@ -10,7 +10,7 @@ namespace GameCore.Scripts.InputProvider
 
         private void Update()
         {
-            var tapped = Input.GetMouseButtonDown(0) && !RaycastUtils.IsPointerOverUI();
+            var tapped = Input.GetMouseButtonDown(0);
             var released = Input.GetMouseButtonUp(0);
             if (tapped)
                 playerInputData.OnTapped?.Invoke();

@@ -25,7 +25,7 @@ public class MinionBase : MonoBehaviour
     {
     }
 
-    public virtual void DestroySelf()
+    public virtual void JumpAnimation()
     {
     }
 }

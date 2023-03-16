@@ -15,4 +15,4 @@ MonoBehaviour:
   hasScene: 1
   levelScene:
     m_sceneAsset: {fileID: 102900000, guid: a6d7e5942f6d68e449c6e3e81f90671b, type: 3}
-    m_sceneName: Game
+    m_sceneName: Level-1

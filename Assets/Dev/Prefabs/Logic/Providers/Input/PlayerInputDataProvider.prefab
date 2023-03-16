@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6985536473394430595}
   - component: {fileID: 6985536473394430597}
   - component: {fileID: 6985536473394430594}
+  - component: {fileID: 1998003223733216231}
   m_Layer: 0
   m_Name: PlayerInputDataProvider
   m_TagString: Untagged
@@ -66,3 +67,43 @@ MonoBehaviour:
   xLerpSpeed: 17
   yLerpSpeed: 17
   debug: 0
+--- !u!114 &1998003223733216231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6985536473394430592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e60f5cab64d5add4fbf8d442b822c5f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameStateEvents: {fileID: 11400000, guid: 4ef6d3aed3b65ae4985a0ae7536d6e49, type: 2}
+  OnGameStartedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGamePausedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGameFinishedEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6985536473394430592}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnGameWinEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGameOverEvent:
+    m_PersistentCalls:
+      m_Calls: []

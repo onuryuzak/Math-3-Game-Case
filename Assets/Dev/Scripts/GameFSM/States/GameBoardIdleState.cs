@@ -20,7 +20,7 @@ public class GameBoardIdleState : GameBoardState
 
     public override void Update()
     {
-        if (!Input.GetMouseButtonDown(0)) return;
+        if (!board.playerInputData.Tapped) return;
         var item = FindItemAtMousePosition();
         if (item == null) return;
         draggedItem = item;

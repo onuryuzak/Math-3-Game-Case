@@ -13,13 +13,9 @@ public class GameMenu : MonoBehaviour
     [SerializeField] private GameStateEvents gameStateEvents;
 
     [SerializeField] private GameObject winPanel;
-    [SerializeField] private GameObject gameOverPanel;
 
     [SerializeField] private float winPanelOpenDelay = 2.5f;
     [SerializeField] private float winPanelOpenDuration = .7f;
-
-    [SerializeField] private float failPanelOpenDelay = .5f;
-    [SerializeField] private float failPanelOpenDuration = .7f;
 
     #endregion
 
@@ -35,13 +31,11 @@ public class GameMenu : MonoBehaviour
     private void OnEnable()
     {
         gameStateEvents.OnWin.AddListener(OnGameWin);
-        gameStateEvents.OnGameOver.AddListener(OnGameOver);
     }
 
     private void OnDisable()
     {
         gameStateEvents.OnWin.RemoveListener(OnGameWin);
-        gameStateEvents.OnGameOver.RemoveListener(OnGameOver);
     }
 
     #endregion
@@ -88,14 +82,6 @@ public class GameMenu : MonoBehaviour
             return;
         _gameFinished = true;
         StartCoroutine(OpenPanelDelayed(winPanel, winPanelOpenDelay, winPanelOpenDuration));
-    }
-
-    private void OnGameOver()
-    {
-        if (_gameFinished)
-            return;
-        _gameFinished = true;
-        StartCoroutine(OpenPanelDelayed(gameOverPanel, failPanelOpenDelay, failPanelOpenDuration));
     }
 
     #endregion

@@ -8,6 +8,8 @@ namespace Base.Events
         public static class GameplayEvents
         {
             public static Action OnGameEnd;
+            public static Action OnCheckPanelsCondition;
+            public static Action<CountPanel> OnFoundCountPanelForMerge;
         }
     }
 }

@@ -21,30 +21,6 @@ public class GameBoardDragItemState : GameBoardState
     {
         UpdateDraggedItemPosition();
         CheckIfMouseButtonUp();
-        // Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        // draggedItem.transform.position = mousePos;
-        //
-        // if (!Input.GetMouseButtonUp(0)) return;
-        // var dropCell = board.GetDropPosition(draggedItem.transform);
-        // if (dropCell != null && !dropCell.isFull)
-        // {
-        //     draggedItem.SnapToCell(dropCell.transform.position);
-        //     draggedItem.minionSprite.sortingOrder = 2;
-        //     draggedItem.SetCurrentCell(dropCell);
-        //     draggedItem.currentCell.isFull = true;
-        //     draggedItem.SetCurrentIndex(dropCell.transform.position);
-        //     board.mergeCount = 0;
-        //     board.matchedMinion.Clear();
-        //     var (mergeCondition, minionType) = board.DetectAndMergeMinions(draggedItem);
-        //     if (mergeCondition)
-        //     {
-        //         SetState(new GameBoardMergeUIState(board, minionType));
-        //     }
-        //     else
-        //     {
-        //         SetState(new GameBoardIdleState(board));
-        //     }
-        // }
     }
 
     private void UpdateDraggedItemPosition()
@@ -55,7 +31,7 @@ public class GameBoardDragItemState : GameBoardState
 
     private void CheckIfMouseButtonUp()
     {
-        if (!Input.GetMouseButtonUp(0)) return;
+        if (!board.playerInputData.Released) return;
 
         var dropCell = board.GetDropPosition(draggedItem.transform);
         if (dropCell != null && !dropCell.isFull)
@@ -73,7 +49,7 @@ public class GameBoardDragItemState : GameBoardState
         draggedItem.SetCurrentIndex(dropCell.transform.position);
 
         board.mergeCount = 0;
-        board.matchedMinion.Clear();
+        
         var (mergeCondition, minionType) = board.DetectAndMergeMinions(draggedItem);
 
         if (mergeCondition)

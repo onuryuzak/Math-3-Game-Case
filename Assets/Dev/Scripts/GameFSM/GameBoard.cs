@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Base.Events;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -9,14 +11,26 @@ public class GameBoard : MonoBehaviour
 {
     #region INSPECTOR FIELDS
 
-    [SerializeField] private int rows = 5;
-    [SerializeField] private int cols = 5;
-    [SerializeField] private float horizontalSpacing = 1.8f;
-    [SerializeField] private float verticalSpacing = 2f;
-    [SerializeField] private int spawnCount = 7;
-    [SerializeField] private GameObjectFactory cellFactory;
-    [SerializeField] private List<GameObjectFactory> minionsFactory = new List<GameObjectFactory>();
-    [SerializeField] private List<Vector2> cellIndex;
+    [FoldoutGroup("Variables")] [SerializeField]
+    private int rows = 5;
+
+    [FoldoutGroup("Variables")] [SerializeField]
+    private int cols = 5;
+
+    [FoldoutGroup("Variables")] [SerializeField]
+    private float horizontalSpacing = 1.8f;
+
+    [FoldoutGroup("Variables")] [SerializeField]
+    private float verticalSpacing = 2f;
+
+    [FoldoutGroup("Variables")] [SerializeField]
+    private int spawnCount = 7;
+
+    [FoldoutGroup("References")] [SerializeField]
+    private GameObjectFactory cellFactory;
+
+    [FoldoutGroup("References")] [SerializeField]
+    private List<GameObjectFactory> minionsFactory = new List<GameObjectFactory>();
 
     #endregion
 
@@ -30,8 +44,9 @@ public class GameBoard : MonoBehaviour
 
     #region PUBLIC FIELDS
 
-    public int mergeCount = 0;
-    public List<Minion> matchedMinion = new List<Minion>();
+    [FoldoutGroup("References")] public PlayerInputData playerInputData;
+    [HideInInspector] public int mergeCount = 0;
+    [HideInInspector] public List<Minion> matchedMinion = new List<Minion>();
 
     #endregion
 
@@ -147,12 +162,10 @@ public class GameBoard : MonoBehaviour
         {
             if (neighbor.MinionType == currentMinion.MinionType)
             {
-                Debug.Log(neighbor.name + " = minion name");
                 if (!matchedMinion.Contains(neighbor))
                     matchedMinion.Add(neighbor);
                 mergeCount++;
                 DetectAndMergeMinions(neighbor, currentMinion);
-                Debug.Log(mergeCount);
             }
         }
 
@@ -160,8 +173,8 @@ public class GameBoard : MonoBehaviour
         if (mergeCount >= 2)
         {
             MergeMatchedMinion();
-
             InitializeGridMinions();
+
             neighbors.Clear();
             return (true, GetMatchedMinionType());
         }
@@ -180,10 +193,10 @@ public class GameBoard : MonoBehaviour
 
     private void MergeMatchedMinion()
     {
-        foreach (var cc in matchedMinion)
+        foreach (var minion in matchedMinion)
         {
-            cc.DestroySelf();
-            spawnedMinions.Remove(cc);
+            minion.JumpAnimation();
+            spawnedMinions.Remove(minion);
         }
     }
 
