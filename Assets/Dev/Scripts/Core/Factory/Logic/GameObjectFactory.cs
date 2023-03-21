@@ -50,32 +50,9 @@ public class GameObjectFactory : ScriptableObject
     public TComponent Create<TComponent>(Vector3? pos = null, Quaternion? rot = null, Vector3? scale = null, Transform parent = null)
         where TComponent : Component =>
         Create(pos, rot, scale, parent).GetComponent<TComponent>();
-
-    public void CreateAtTarget(Transform target) => Create(target.position);
-    public void CreateAtPosition(Vector3 pos) => Create(pos);
-    public void CreateAtPositionWithScaleFloat(Vector3 pos, float scale) => Create(pos, null, Vector3.one * scale);
-    public void CreateAtPositionWithScaleFloat(Vector3 pos, Vector3 scale) => Create(pos, null, scale);
 }
 
 public abstract class GameObjectFactory<TComponent> : ScriptableObject where TComponent : Component
 {
     [SerializeField] private TComponent prefab;
-
-    public TComponent Prefab => prefab;
-
-    public TComponent Create(Vector3? pos = null, Quaternion? rot = null, Transform parent = null)
-    {
-        var obj = Instantiate(prefab, parent);
-
-        if (pos.HasValue)
-            obj.transform.position = pos.Value;
-
-        if (rot.HasValue)
-            obj.transform.rotation = rot.Value;
-
-        return obj;
-    }
-
-    public void CreateAtTarget(Transform target) => Create(target.position, Quaternion.identity);
-    public void CreateAtPosition(Vector3 pos) => Create(pos, Quaternion.identity);
 }
